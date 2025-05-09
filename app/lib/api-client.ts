@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: `${window.location.protocol}//${window.location.hostname}/api.php`,
+  baseURL: `http://localhost/api.php`,
+  //baseURL: `${window.location.protocol}//${window.location.hostname}/api.php`,  
   headers: {
     'Content-Type': 'application/json',
   },
