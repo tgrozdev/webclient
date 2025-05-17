@@ -94,7 +94,7 @@ export default function Home() {
                   >
                     {menu.title}
                   </a>
-                ))}
+                ))}  
               </div>
             </div>
             
@@ -146,7 +146,7 @@ export default function Home() {
           </div>
         </div>
       </nav>      
-      <div id="content"></div>
+      <div id="content" className="container mx-auto"></div>
     </main>
   );
 }
