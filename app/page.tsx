@@ -57,6 +57,14 @@ export default function Home() {
   const LoadContent = (content: ContentItem) => {    
     console.log(content);
     setCurrentContent(content.content);
+    const contentDiv = document.getElementById('content');
+    if (contentDiv) {
+      contentDiv.innerHTML = content.content;
+    }
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+      mobileMenu.classList.toggle('hidden');
+    }
   }
 
   useEffect(() => {
@@ -72,7 +80,7 @@ export default function Home() {
   if (error) return <div className="text-red-500 p-4">Error loading menu</div>;
   return (
     <main>
-            <nav className="bg-white shadow-md">
+      <nav className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
@@ -86,9 +94,7 @@ export default function Home() {
                     href={"#"}
                     onClick={() => {                      
                       const content = data?.content.find(c => c.url === menu.url);
-                      if (content) LoadContent(content);
-                      //LoadContent(data?.content[0]);
-                      //console.log(data?.content[0]);
+                      if (content) LoadContent(content);                      
                     }}
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500"
                   >
@@ -101,6 +107,13 @@ export default function Home() {
             {/* Mobile menu button */}
             <div className="flex items-center sm:hidden">
               <button
+                id="mobile-menu-button"
+                onClick={() => {
+                  const mobileMenu = document.getElementById('mobile-menu');
+                  if (mobileMenu) {
+                    mobileMenu.classList.toggle('hidden');
+                  }
+                }}
                 type="button"
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                 aria-controls="mobile-menu"
@@ -129,7 +142,7 @@ export default function Home() {
         </div>
 
         {/* Mobile menu, show/hide based on menu state */}
-        <div className="sm:hidden" id="mobile-menu">
+        <div className="hidden sm:hidden" id="mobile-menu">
           <div className="pt-2 pb-3 space-y-1">
             {data?.menu?.map((menu) => (
               <a
